@@ -1,0 +1,41 @@
+# Ignorar los archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar configuraciones de entorno
+.env
+.env.local
+.env.*.local
+
+# Ignorar logs
+logs/
+*.log
+
+# Ignorar carpetas de caché y sesiones
+cache/
+sessions/
+
+# Ignorar datos de bases de datos y volúmenes de Docker
+db_data/
+
+# Ignorar carpetas de dependencias
+vendor/
+
+# Ignorar archivos generados por Docker
+docker-compose.override.yml
+*.pid
+
+# Ignorar IDEs y editores
+.idea/
+.vscode/
+*.swp
+
+# Ignorar archivos específicos del sistema operativo
+*.bak
+*.tmp
+
+# Ignorar otros archivos innecesarios
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
