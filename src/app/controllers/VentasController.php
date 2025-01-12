@@ -58,7 +58,7 @@ class VentasController
         $conceptos = $this->venta->getVentasPorConcepto($filtro_fecha_inicio, $filtro_fecha_fin, $filtro_tipo_producto, $filtro_cantidad_m3, $filtro_total_mxn);
 
 // Obtener los clientes con saldo vencido
-        $clientes = $this->venta->getClientesSaldoVencido();
+        $clientes = $this->venta->getClientesSaldoVencido($filtro_fecha_inicio, $filtro_fecha_fin);
 
 // Obtener ventas por grupo de negocio
         $grupoNegocio = $this->venta->getVentasPorGrupoNegocio($filtro_fecha_inicio, $filtro_fecha_fin, $filtro_tipo_producto, $filtro_cantidad_m3, $filtro_total_mxn);

@@ -9,6 +9,7 @@
 </head>
 <body>
 <div class="container my-5">
+    <button class="btn"><a href="index.php?controller=upload">Ir a subir archivos</a></button>
     <h1>Ventas</h1>
     <form method="GET" action="">
         <div class="row g-3 mb-4">
@@ -41,32 +42,6 @@
         </div>
     </form>
 
-<!--    <h2 class="my-4">Lista de Ventas</h2>-->
-<!--    <table class="table table-striped table-bordered">-->
-<!--        <thead class="table-dark">-->
-<!--        <tr>-->
-<!--            <th>ID Venta</th>-->
-<!--            <th>Cliente</th>-->
-<!--            <th>Producto</th>-->
-<!--            <th>Fecha de Venta</th>-->
-<!--            <th>Cantidad (m³)</th>-->
-<!--            <th>Total (MXN)</th>-->
-<!--        </tr>-->
-<!--        </thead>-->
-<!--        <tbody>-->
-<!--        --><?php //foreach ($ventas as $venta): ?>
-<!--            <tr>-->
-<!--                <td>--><?php //echo $venta['id_venta']; ?><!--</td>-->
-<!--                <td>--><?php //echo $venta['cliente']; ?><!--</td>-->
-<!--                <td>--><?php //echo $venta['nombre_producto']; ?><!--</td>-->
-<!--                <td>--><?php //echo $venta['fecha_venta']; ?><!--</td>-->
-<!--                <td>--><?php //echo $venta['cantidad_m3']; ?><!--</td>-->
-<!--                <td>--><?php //echo '$' . number_format($venta['total_mxn'], 2); ?><!--</td>-->
-<!--            </tr>-->
-<!--        --><?php //endforeach; ?>
-<!--        </tbody>-->
-<!--    </table>-->
-
     <h2 class="my-4">Gráfica de Ventas por Grupo de Negocio</h2>
     <canvas id="grupoNegocioChart" width="400" height="200"></canvas>
 
@@ -75,6 +50,33 @@
 
     <h2 class="my-4">Gráfica de Clientes con Saldo Vencido</h2>
     <canvas id="clientesVencidoChart" width="400" height="200"></canvas>
+
+    <h2 class="my-4">Lista de Ventas</h2>
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>ID Venta</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Fecha de Venta</th>
+            <th>Cantidad (m³)</th>
+            <th>Total (MXN)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($ventas as $venta): ?>
+            <tr>
+                <td><?php echo $venta['id_venta']; ?></td>
+                <td><?php echo $venta['cliente']; ?></td>
+                <td><?php echo $venta['nombre_producto']; ?></td>
+                <td><?php echo $venta['fecha_venta']; ?></td>
+                <td><?php echo $venta['cantidad_m3']; ?></td>
+<!--                <td>--><?php //echo $venta['saldo_vencido']; ?><!--</td>-->
+                <td><?php echo '$' . number_format($venta['total_mxn'], 2); ?></td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
 
 <!-- Bootstrap JS (opcional) -->

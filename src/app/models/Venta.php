@@ -170,21 +170,36 @@ class Venta
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getClientesSaldoVencido()
+    public function getClientesSaldoVencido($fecha_inicio = null, $fecha_fin = null)
     {
         $query = "
-        SELECT 
-            c.nombre AS cliente, 
-            SUM(v.total_mxn) AS saldo_vencido
-        FROM ventas v
-        INNER JOIN clientes c ON v.id_cliente = c.id_cliente
-        WHERE v.fecha_venta < NOW() AND v.total_mxn > 0
-        GROUP BY c.id_cliente
-        HAVING saldo_vencido > 0
+    SELECT 
+        c.nombre AS cliente, 
+        SUM(v.total_mxn) AS saldo_vencido
+    FROM ventas v
+    INNER JOIN clientes c ON v.id_cliente = c.id_cliente
+    WHERE v.fecha_venta < NOW() 
+      AND v.total_mxn > 0
     ";
 
+        // Agregar filtros por rango de fechas
+        if ($fecha_inicio && $fecha_fin) {
+            $query .= " AND v.fecha_venta BETWEEN :fecha_inicio AND :fecha_fin";
+        }
+
+        $query .= " GROUP BY c.id_cliente
+                HAVING saldo_vencido > 0";
+
         $stmt = $this->conn->prepare($query);
+
+        // Vincular parámetros de fecha si están presentes
+        if ($fecha_inicio && $fecha_fin) {
+            $stmt->bindParam(':fecha_inicio', $fecha_inicio);
+            $stmt->bindParam(':fecha_fin', $fecha_fin);
+        }
+
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
 }
